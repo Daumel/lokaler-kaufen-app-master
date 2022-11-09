@@ -1,0 +1,89 @@
+.landing-page {
+  width: 740px;
+}
+
+.form-section {
+  display: flex;
+  flex-direction: column;
+  max-width: 500px;
+  margin: auto;
+}
+
+.zip-code-input {
+  text-align: center;
+}
+
+@media screen and (max-width: 719px) {
+  .landing-page {
+    width: auto;
+  }
+}
+
+form mat-form-field, button, a[mat-raised-button] {
+  width: 100%;
+}
+
+h2, h3, p {
+  text-align: center;
+}
+
+.explanation-area {
+  background-color: #673ab7;
+  position: relative;
+  margin-top: 120px;
+}
+
+.explanation-area::before {
+  content: " ";
+  position: absolute;
+  top: -100px;
+  left: 0;
+  right: 0;
+  height: 100px;
+  background-color: #673ab7;
+
+  /* The points are: right-top, right-bottom, a teensy bit under the right-bottom,
+   a teensy bit under left-bottom, left bottom.
+
+   Having the additional two points under the triangle prevents an ugly line in
+   Chrome between the triangle and the explanation area block. I know. Don't judge me. */
+  clip-path: polygon(100% 0, 100% 100%, 100% 101%, 0 101%, 0 100%);
+}
+
+.explanation-area h2, h3, p {
+  color: #fafafa;
+}
+
+.explanation-area h3 {
+  font-weight: bold;
+}
+
+.explanation-card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.explanation-card {
+  box-sizing: border-box;
+  width: 33%;
+  text-align: center;
+}
+
+@media screen and (max-width: 719px) {
+  .explanation-card {
+    width: 85%;
+  }
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}

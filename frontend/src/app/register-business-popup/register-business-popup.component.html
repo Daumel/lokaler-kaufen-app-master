@@ -1,0 +1,31 @@
+<div *ngIf="!showConfirmDialog">
+  <h1 mat-dialog-title translate>registration.popup.heading</h1>
+  <div mat-dialog-content>
+    <p translate>registration.popup.description</p>
+    <mat-form-field>
+      <mat-label translate>registration.popup.email</mat-label>
+      <input matInput pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$" required [formControl]="email"
+             type="email"
+             (keyup.enter)="sendConfirmationMail()">
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-raised-button (click)="onNoClick()">
+      <span translate>registration.popup.cancel</span>
+    </button>
+    <button mat-raised-button type="button" color="primary" (click)="sendConfirmationMail()" [disabled]="!email.valid">
+      <span translate>registration.popup.submit</span>
+    </button>
+  </div>
+</div>
+<div *ngIf="showConfirmDialog">
+  <h1 mat-dialog-title translate>registration.popup.confirmation.title</h1>
+  <div mat-dialog-content>
+    <p>{{ 'registration.popup.confirmation.description' | translate: { email: email } }}</p>
+  </div>
+  <div mat-dialog-actions style="alignment: center">
+    <button mat-raised-button color="primary" [mat-dialog-close]="" cdkFocusInitial>
+      <span translate>registration.popup.confirmation.submit</span>
+    </button>
+  </div>
+</div>

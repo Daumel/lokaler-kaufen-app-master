@@ -1,0 +1,347 @@
+<p translate>shop.creation.heading</p>
+
+<mat-vertical-stepper [linear]="true" #stepper (selectionChange)="previewSlots($event)">
+  <mat-step [stepControl]="nameFormGroup">
+    <form [formGroup]="nameFormGroup">
+      <ng-template matStepLabel>
+        <span translate>shop.creation.start.heading</span>
+      </ng-template>
+      <mat-form-field>
+        <mat-label translate>shop.creation.start.name</mat-label>
+        <input matInput placeholder="{{ 'shop.creation.start.name.placeholder' | translate }}"
+               formControlName="nameCtrl" required>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>shop.creation.start.shop.name</mat-label>
+        <input matInput placeholder="{{ 'shop.creation.start.shop.name.placeholder' | translate}}"
+               formControlName="businessNameCtrl" required>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperNext>
+          <span translate>shop.creation.proceed</span>
+        </button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="addressFormGroup">
+    <form [formGroup]="addressFormGroup">
+      <ng-template matStepLabel><span translate>
+        shop.creation.address.heading</span>
+      </ng-template>
+      <mat-form-field>
+        <mat-label translate>shop.creation.address.street</mat-label>
+        <input matInput formControlName="streetCtrl"
+               placeholder="{{ 'shop.creation.address.street.placeholder' | translate }}"
+               required>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label translate>shop.creation.address.zipcode</mat-label>
+        <input matInput formControlName="zipCtrl"
+               placeholder="{{ 'shop.creation.address.zipcode.placeholder' | translate }" type="text"
+               oninput="javascript: this.value=this.value.replace(new RegExp(/[^\d]/g), ''); if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+               maxlength="5" minlength="5"
+               required>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label translate>shop.creation.address.city</mat-label>
+        <mat-select formControlName="cityCtrl" style="width: 100%" required>
+          <mat-option *ngFor="let city of citySuggestions" [value]="city.placeName">{{city.placeName}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label translate>shop.creation.address.supplement</mat-label>
+        <input matInput formControlName="suffixCtrl"
+               placeholder="{{ 'shop.creation.address.supplement.placeholder' | translate }}">
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperPrevious>
+          <span translate>shop.creation.back</span>
+        </button>
+        <button mat-button matStepperNext>
+          <span translate>shop.creation.proceed</span>
+        </button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="descriptionFormGroup">
+    <form [formGroup]="descriptionFormGroup">
+      <ng-template matStepLabel>
+        <span translate>shop.creation.description.heading</span>
+      </ng-template>
+      <div style="width: 100%">
+        <p translate>shop.creation.description.description</p>
+        <mat-form-field style="width: 100%">
+          <mat-label translate>shop.creation.description.label</mat-label>
+          <textarea matInput formControlName="descriptionCtrl"
+                    placeholder="{{ 'shop.creation.description.placeholder' | translate }}"
+                    required></textarea>
+        </mat-form-field>
+      </div>
+      <div>
+        <p translate>shop.creation.details.heading</p>
+        <div class="social-links">
+          <img src="../assets/web.png" class="social-links-logo">
+          <mat-form-field>
+            <mat-label translate>shop.creation.details.website</mat-label>
+            <input matInput formControlName="urlCtrl"
+                   placeholder="{{ 'shop.creation.details.website.placeholder' | translate }}">
+          </mat-form-field>
+        </div>
+        <p translate>shop.creation.details.social.description</p>
+        <div class="social-links">
+          <img src="../assets/facebook.png" class="social-links-logo">
+          <mat-form-field>
+            <mat-label translate>shop.creation.details.social.facebook</mat-label>
+            <input matInput formControlName="facebookCtrl"
+                   placeholder="{{ 'shop.creation.details.social.facebook.placeholder' | translate }}">
+          </mat-form-field>
+        </div>
+        <div class="social-links">
+          <img src="../assets/instagram.png" class="social-links-logo">
+          <mat-form-field>
+            <mat-label translate>shop.creation.details.social.instagram</mat-label>
+            <input matInput formControlName="instagramCtrl"
+                   placeholder="{{ 'shop.creation.details.social.instagram.placeholder' | translate }}">
+          </mat-form-field>
+        </div>
+        <div class="social-links">
+          <img src="../assets/twitter.png" class="social-links-logo">
+          <mat-form-field>
+            <mat-label translate>shop.creation.details.social.twitter</mat-label>
+            <input matInput formControlName="twitterCtrl"
+                   placeholder="{{ 'shop.creation.details.social.twitter.placeholder' | translate }}">
+          </mat-form-field>
+        </div>
+      </div>
+      <div>
+        <button mat-button matStepperPrevious>
+          <span translate>shop.creation.back</span>
+        </button>
+        <button mat-button matStepperNext>
+          <span translate>shop.creation.proceed</span>
+        </button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="contactFormGroup">
+    <form [formGroup]="contactFormGroup">
+      <ng-template matStepLabel>
+        <span translate>shop.creation.contact.heading</span>
+      </ng-template>
+      <p translate>shop.creation.details.contact.description</p>
+      <small *ngIf="contactFormGroup.hasError('atLeastOneRequired')"
+             style="color: red">{{contactFormGroup.getError('atLeastOneRequired').text}}
+      </small>
+      <div *ngFor="let contactType of contactTypes.availableContactTypes">
+        <p>
+          <mat-icon svgIcon="{{contactType}}"
+                    style="margin-right: 5px; vertical-align: bottom"></mat-icon>
+          {{contactTypes.getDisplayName(contactType)}}
+        </p>
+        <mat-form-field>
+          <mat-label translate>shop.creation.details.contact.contact</mat-label>
+          <input matInput formControlName="{{contactType.toLowerCase()}}Ctrl"
+                 placeholder="{{ 'shop.creation.details.contact.contact.placeholder' | translate }}">
+        </mat-form-field>
+      </div>
+      <div>
+        <button mat-button matStepperPrevious>
+          <span translate>shop.creation.back</span>
+        </button>
+        <button mat-button matStepperNext>
+          <span translate>shop.creation.proceed</span>
+        </button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="openingFormGroup">
+    <form [formGroup]="openingFormGroup">
+      <ng-template matStepLabel>
+        <span translate>shop.creation.opening.heading</span>
+      </ng-template>
+      <div style="margin-top: 15px; margin-bottom: 30px; float:left;"
+           *ngFor="let day of days">
+        <button mat-mini-fab color="primary"
+                [ngClass]="{'disabled' : !this.businessHours.POSSIBLE_BUSINESS_HOURS.get(day).enabled}"
+                (click)="toggleAvailability(day)">{{day.substring(0, 2)}}
+        </button>
+      </div>
+      <div *ngFor="let day of days" style="clear: both;">
+        <h2 [ngClass]="{'disabled-font' : !this.businessHours.POSSIBLE_BUSINESS_HOURS.get(day).enabled}"
+            style="float:left; margin-right: 50px; vertical-align: bottom; width: 15%;">{{day}}</h2>
+        <mat-form-field>
+          <mat-label translate>shop.creation.opening.from</mat-label>
+          <input formControlName="{{day}}FromCtrl" matInput type="time"
+                 value="{{this.businessHours.POSSIBLE_BUSINESS_HOURS.get(day).from}}">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label translate>shop.creation.opening.to</mat-label>
+          <input formControlName="{{day}}ToCtrl" matInput type="time"
+                 value="{{this.businessHours.POSSIBLE_BUSINESS_HOURS.get(day).to}}">
+        </mat-form-field>
+      </div>
+      <div>
+        <span translate>shop.creation.opening.duration</span>
+        <mat-form-field style="width: 30px; padding-left: 8px;">
+          <input formControlName="defaultCtrl" matInput type="number">
+        </mat-form-field>
+        <span translate>shop.creation.opening.minutes</span>
+      </div>
+      <div>
+        <span translate>shop.creation.opening.pause</span>
+        <mat-form-field style="width: 30px; padding-left: 8px;">
+          <input formControlName="pauseCtrl" matInput type="number">
+        </mat-form-field>
+        <span translate>shop.creation.opening.minutes</span>
+      </div>
+      <div>
+        <span translate>shop.creation.opening.delay</span>
+        <mat-form-field style="width: 30px; padding-left: 8px;">
+          <input formControlName="delayCtrl" matInput type="number">
+        </mat-form-field>
+        <span translate>shop.creation.opening.minutes</span>
+      </div>
+      <div>
+        <button mat-button matStepperPrevious>
+          <span translate>shop.creation.back</span>
+        </button>
+        <button mat-button matStepperNext>
+          <span translate>shop.creation.proceed</span>
+        </button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [optional]="true">
+    <ng-template matStepLabel>Sie können auch Pausenzeiten angeben.</ng-template>
+    <p>Wählen sie einfach die Slots aus, zu denen Sie keine Beratung anbieten.</p>
+    <slots [data]="slotsPreview" (selectedSlot)="changeBreakSlot($event)" [isSlotConfig]="true"></slots>
+    <div>
+      <button mat-button matStepperPrevious>Zurück</button>
+      <button mat-button matStepperNext>Weiter</button>
+    </div>
+  </mat-step>
+  <mat-step [optional]="true">
+    <form [formGroup]="logoFormGroup">
+      <ng-template matStepLabel>Sie haben ein Logo?</ng-template>
+      <p>Wählen Sie einfach eine JPEG oder PNG Bilddatei von Ihrem Rechner aus. Die Datei muss kleiner als 5 MB
+        sein.</p>
+      <p>Hier noch ein paar Tipps für ein gutes Logo:</p>
+      <ul>
+        <li>Wählen Sie ein Bild mit einem einheitlichen, einfarbigen Hintergrund, z.B. weiß oder transparent.</li>
+        <li>Vermeiden Sie Bilder mit viel Text. Das Logo wird verkleinert angezeigt und Text damit schwer lesbar.</li>
+        <li>Verwenden Sie keine Fotos. Diese sind verkleinert schwer erkennbar und wirken unruhig.</li>
+        <li>Verwenden Sie ein Bild mit einer Auflösung von mind. 300x300 Pixeln.</li>
+      </ul>
+      <div *ngIf="this.image" style="display: flex; flex-direction: column">
+        <div>
+          <img *ngIf="localImageUrl" src="{{this.localImageUrl}}" style="max-width: 150px; max-height: 150px">
+        </div>
+        <div>
+          Ihre ausgewählte Datei: {{this.image.name}}
+        </div>
+      </div>
+      <div style="display: flex; flex-direction: column;">
+        <div style="max-width: 155px; padding-top: 5px">
+          <input style="display: none" type="file" (change)="onFileChanged($event)" #fileInput>
+          <button mat-raised-button color="primary" (click)="fileInput.click()">Datei auswählen...</button>
+        </div>
+        <div style="padding-top: 10px;" *ngIf="image">
+          <p>Um das Logo auf der Seite Ihres Ladens schöner in Szene zu setzen, passen wir die Farbe rund um Ihr Logo
+            automatisch an. Das funktioniert in den allermeisten Fällen sehr gut. Falls Sie jedoch mit dem Ergebnis
+            unzufrieden sind, können Sie die Funktion auch später jederzeit deaktivieren.</p>
+          <mat-checkbox formControlName="autoColorCtrl">Automatische Farbe aktivieren (empfohlen)
+          </mat-checkbox>
+        </div>
+      </div>
+      <mat-error *ngIf="fileIsTooBig">Die Datei ist zu groß. Bitte wählen Sie eine Datei aus, die maximal 2 MB groß ist.
+      </mat-error>
+      <mat-error *ngIf="wrongFileExtension">Bitte wählen Sie eine Datei mit der Endung '.png', '.jpeg' oder '.jpg' aus.
+      </mat-error>
+      <div style="padding-top: 15px">
+        <button mat-button matStepperPrevious>Zurück</button>
+        <button mat-button matStepperNext>Weiter</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="passwordFormGroup">
+    <form [formGroup]="passwordFormGroup">
+      <ng-template matStepLabel>
+        <span translate>shop.creation.password.heading</span>
+      </ng-template>
+      <p translate>shop.creation.password.description</p>
+      <div>
+        <mat-form-field appearance="outline">
+          <mat-label translate>shop.creation.password.password</mat-label>
+          <mat-pass-toggle-visibility #toggleVisbility matSuffix></mat-pass-toggle-visibility>
+          <input matInput #passwordWithValidation
+                 [type]="toggleVisbility.type"
+                 required
+                 formControlName="passwordCtrl"
+                 placeholder="{{ 'shop.creation.password.password.placeholder' | translate }}"
+                 tabindex="1">
+          <mat-hint align="end" aria-live="polite">
+            {{passwordWithValidation.value.length}} / 25
+          </mat-hint>
+          <mat-error *ngIf="passwordComponentWithValidation.passwordFormControl.hasError('required')" translate>
+            shop.creation.password.error.required
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label translate>shop.creation.password.repeat</mat-label>
+          <mat-pass-toggle-visibility #toggleVisbility matSuffix></mat-pass-toggle-visibility>
+          <input matInput #passwordConfirm
+                 [type]="toggleVisbility.type"
+                 required
+                 formControlName="confirmPasswordCtrl"
+                 placeholder="{{ 'shop.creation.password.repeat.placeholder' | translate }"
+                 tabindex="2">
+          <mat-error *ngIf="passwordComponentWithValidation.passwordFormControl.hasError('required')" translate>
+            shop.creation.password.error.required
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div style="width: 50%">
+        <mat-password-strength #passwordComponentWithValidation
+                               [password]="passwordWithValidation.value"
+                               [enableSpecialCharRule]=false
+                               [enableDigitRule]=false
+                               [min]=12>
+        </mat-password-strength>
+        <!--Password's strength info-->
+        <mat-password-strength-info
+          [passwordComponent]="passwordComponentWithValidation"
+          minCharsCriteriaMsg="{{ 'shop.creation.password.validation.count' | translate }}"
+          lowerCaseCriteriaMsg="{{ 'shop.creation.password.validation.lowercase' | translate }}"
+          upperCaseCriteriaMsg="{{ 'shop.creation.password.validation.lowercase' | translate }}">
+        </mat-password-strength-info>
+      </div>
+      <div class="padding-vertical">
+        <mat-checkbox formControlName="privacyCtrl" translate>shop.creation.password.privacy</mat-checkbox>
+      </div>
+      <div>
+        <button mat-button matStepperPrevious>
+          <span translate>shop.creation.back</span>
+        </button>
+        <button mat-button matStepperNext>
+          <span translate>shop.creation.proceed</span>
+        </button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>
+      <span translate>shop.creation.finish.heading</span>
+    </ng-template>
+    <p translate>shop.creation.finish.description</p>
+    <div>
+      <button mat-button matStepperPrevious>
+        <span translate>shop.creation.back</span>
+      </button>
+      <button mat-button (click)="createShop()">
+        <span translate>shop.creation.save</span>
+      </button>
+    </div>
+    <mat-progress-bar *ngIf="this.progress > 0" [value]="this.progress" style="width: 20%"></mat-progress-bar>
+  </mat-step>
+</mat-vertical-stepper>
+<page-footer></page-footer>

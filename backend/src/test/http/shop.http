@@ -1,0 +1,108 @@
+### Get shop details
+
+GET {{ host }}/api/shop/0943214c-bd11-4048-a2f9-d37c782db11c
+Accept: application/json, */*
+
+### Get shop details as admin
+
+GET {{ host }}/api/shop/me
+Accept: application/json, */*
+
+### List nearby shops
+
+GET {{ host }}/api/shop/nearby?zipCode=15326
+Accept: application/json, */*
+
+### Create Shop
+
+POST {{ host }}/api/shop?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJmb29AbG9jYWwuaG9zdCIsIm5iZiI6MTU4NjA3NjMzNiwiaXNzIjoibWVyY3VyeS1zaG9wLWNyZWF0aW9uIiwiZXhwIjoxNTg2MjQ5MTM2LCJpYXQiOjE1ODYwNzYzMzZ9.5lL3Y1_JBQpjQtgLTlbciG82v3IBZhLcsZoLpySjLK8
+Accept: application/json
+Content-Type: application/json
+
+{
+    "id": "",
+    "name": "Horst's Burgerladen",
+    "ownerName": "Horst",
+    "email": "info@example.com",
+    "street": "Münchner Straße 13",
+    "zipCode": "81549",
+    "city": "München",
+    "addressSupplement": "",
+    "password": "VerySecretPassword",
+    "details": "Beste Burger in ganz München. Vielleicht.",
+    "website": "http://www.horsts-burgerladen.muenchen",
+    "contacts": {
+        "SIGNAL": "Der_Horst",
+        "WHATSAPP": "0151/1234567"
+    },
+    "slots": {
+        "timePerSlot": 15,
+        "timeBetweenSlots": 5,
+        "monday": {
+            "start": "10:00",
+            "end": "17:00"
+        },
+        "tuesday": {
+            "start": "08:00",
+            "end": "18:00"
+        },
+        "wednesday": {
+            "start": "15:00",
+            "end": "22:30"
+        }
+    }
+}
+
+### Update shop
+
+PUT {{ host }}/api/shop
+Accept: application/json
+Content-Type: application/json
+
+{
+    "id": "",
+    "name": "Horst's Burgerladen 6",
+    "ownerName": "Horst",
+    "email": "info@example.com",
+    "street": "Münchner Straße 13",
+    "zipCode": "83464",
+    "city": "München",
+    "addressSupplement": "",
+    "contactTypes": [
+        "FACEBOOK_MESSENGER",
+        "WHATSAPP"
+    ]
+}
+
+### Send creation link
+
+POST {{ host }}/api/shop/send-create-link
+Accept: application/json
+Content-Type: application/json
+
+{
+    "email": "foo@local.host"
+}
+
+### Send password reset link
+
+POST {{ host }}/api/shop/send-password-reset-link
+Accept: application/json
+Content-Type: application/json
+
+{
+    "email": "moe@local.host"
+}
+
+### Reset password
+
+POST {{ host }}/api/shop/reset-password?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtb2VAbG9jYWxob3N0IiwiaXNzIjoibWVyY3VyeS1wYXNzd29yZC1yZXNldCJ9.11CYC7igayF1UesJ7KaBFvq2DLHmqjy367w1ggUjxo8
+Accept: application/json
+Content-Type: application/json
+
+{
+    "password": "new-password"
+}
+
+###
+

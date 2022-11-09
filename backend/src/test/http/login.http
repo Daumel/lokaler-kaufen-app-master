@@ -1,0 +1,47 @@
+## Login as admin
+
+POST {{ host }}/api/admin/login
+Content-Type: application/json
+Accept: application/json, */*
+
+{
+    "email": "admin-1@local.host",
+    "password": "admin-1"
+}
+
+### Check admin login
+
+GET {{ host }}/api/admin/login
+
+### Admin token info
+
+GET {{ host }}/api/admin/login/token-info
+
+### Logout as admin
+
+DELETE {{ host }}/api/admin/login
+
+### Login as shop
+
+POST {{ host }}/api/shop/login
+Content-Type: application/json
+Accept: application/json, */*
+
+{
+    "email": "moe@local.host",
+    "password": "moe"
+}
+
+### Check shop login
+
+GET {{ host }}/api/shop/login
+
+### Shop token info
+
+GET {{ host }}/api/shop/login/token-info
+
+### Logout as shop
+
+DELETE {{ host }}/api/shop/login
+
+###

@@ -1,0 +1,13 @@
+<div class="login-page">
+
+  <header>
+    <h2 translate>admin.login.heading</h2>
+  </header>
+
+  <login-form class="login-form"
+              [apiPath]="'/api/admin/login'"
+              [redirectPath]="'admin/overview'"
+              (loginSuccessful)="onSuccessfulLogin()"
+  ></login-form>
+
+</div>

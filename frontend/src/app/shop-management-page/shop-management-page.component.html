@@ -1,0 +1,9 @@
+<shop-details (updateShopEvent)="updateShop($event)"
+              [detailsObservable]="shopDetails"
+              [sendUpdatedShopDetails]="getUpdatedDetails"></shop-details>
+<button class="save-button" mat-raised-button color="primary"
+        (click)="this.getUpdatedDetails.next(true)">
+  <span translate>shop.management.save</span>
+</button>
+<mat-progress-bar *ngIf="this.progress > 0" [value]="this.progress" class="save-button"></mat-progress-bar>
+<page-footer></page-footer>

@@ -1,0 +1,75 @@
+.mat-form-field {
+  margin-right: 15px;
+}
+
+.day-buttons {
+  margin-top: 15px;
+  margin-bottom: 30px;
+  float: left;
+}
+
+.mat-mini-fab {
+  margin-right: 5px;
+}
+
+.disabled {
+  background: lightgrey;
+}
+
+.disabled-font {
+  color: lightgrey;
+}
+
+.social-links {
+  padding-right: 15px;
+  display: flex;
+  align-items: center;
+}
+
+.social-links mat-form-field {
+  margin-left: 5px;
+}
+
+.social-links-logo {
+  padding-right: 5px;
+  height: 25px;
+  width: 25px;
+}
+
+@media (max-width: 719px) {
+
+  ::ng-deep .mat-vertical-stepper .mat-step-header {
+    width: 90vw !important;
+  }
+
+  ::ng-deep .mat-step {
+    width: 90vw !important;
+  }
+
+  ::ng-deep .mat-stepper-vertical-line::before {
+    border-left-width: 0 !important;
+  }
+
+
+  .mat-mini-fab {
+    width: 30px;
+    height: 30px;
+    line-height: 14px;
+    font-size: 14px;
+    margin-right: 2px;
+  }
+
+  ::ng-deep .mat-button-wrapper {
+    line-height: 14px;
+    vertical-align: center;
+  }
+
+  .password-strength-box {
+    width: 100%;
+  }
+
+  .save-button {
+    width: 100%;
+    text-align: center;
+  }
+}

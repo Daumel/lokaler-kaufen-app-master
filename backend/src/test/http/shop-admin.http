@@ -1,0 +1,59 @@
+# Before running requests, make sure to execute 'Login as admin' first. This will set the necessary cookies.
+
+### Login as admin
+POST {{ host }}/api/admin/login
+Content-Type: application/json
+
+{
+    "email": "admin-1@local.host",
+    "password": "admin-1"
+}
+
+### Get single shop
+
+GET {{ host }}/api/admin/shop/c7ebc3eb-7334-4a46-8aa1-eb5779cf4b1e
+Accept: application/json, */*
+
+### List all shops
+
+GET {{ host }}/api/admin/shop
+Accept: application/json, */*
+
+### Approve shop
+
+PUT {{ host }}/api/admin/shop/75bd5eff-6a56-450a-9055-947cb5c4d7e0/approve?approved=true
+Accept: application/json, */*
+
+### Disapprove shop
+
+PUT {{ host }}/api/admin/shop/75bd5eff-6a56-450a-9055-947cb5c4d7e0/approve?approved=false
+Accept: application/json, */*
+
+### Update shop
+
+PUT {{ host }}/api/admin/shop/1c498404-a926-4af7-9082-0fc884f5621c
+Accept: application/json, */*
+Content-Type: application/json
+
+{
+    "id": "1c498404-a926-4af7-9082-0fc884f5621c",
+    "name": "Horst's Burgerladen 6",
+    "ownerName": "Horst",
+    "email": "info@example.com",
+    "street": "Münchner Straße 13",
+    "zipCode": "83464",
+    "city": "München",
+    "addressSupplement": "",
+    "contactTypes": [
+        "FACEBOOK_MESSENGER",
+        "WHATSAPP",
+        "VIBER"
+    ]
+}
+
+### Delete shop
+
+DELETE {{ host }}/api/admin/shop/879cafc3-9016-42e4-ae75-af8d3b8f44d8
+Accept: application/json, */*
+
+###

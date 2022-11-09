@@ -1,0 +1,7 @@
+Hallo {{ ownerName }},
+
+ein Administrator hat Ihren Laden auf lokaler.kaufen deaktiviert. Um Genaueres zu erfahren, wenden Sie sich bitte unter Angabe Ihres Ladens an support@lokaler.kaufen.
+
+Viele Grüße
+
+Ihr lokaler.kaufen Team

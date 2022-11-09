@@ -1,0 +1,28 @@
+<div class="login-page">
+
+  <section class="padding-vertical"
+           [ngClass]="{'margin-horizontal': !isSmallScreen, 'margin-big-bottom': isSmallScreen}">
+
+    <header>
+      <h2 translate>login.description</h2>
+    </header>
+
+    <login-form
+      class="login-form"
+      [apiPath]="'/api/shop/login'"
+      [redirectPath]="'manage-shop'"
+      (loginSuccessful)="onLoginSuccess()"
+    ></login-form>
+
+    <div class="buttons margin-big-top">
+      <a mat-button color="primary" (click)="signup()">
+        <span translate>login.register</span>
+      </a>
+      <a mat-button color="primary" (click)="passwordReset()">
+        <span translate>login.password.forgotten</span>
+      </a>
+    </div>
+
+  </section>
+
+</div>

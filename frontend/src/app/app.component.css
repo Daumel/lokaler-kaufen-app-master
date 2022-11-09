@@ -1,0 +1,22 @@
+mat-toolbar {
+  justify-content: space-between;
+}
+
+main {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100%;
+}
+
+a.mat-stroked-button {
+  color: white;
+}
+
+.not-supported-banner {
+  background-color: #f44336;
+  color: white;
+  text-align: center;
+}

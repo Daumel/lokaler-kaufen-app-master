@@ -1,0 +1,280 @@
+<p translate>shop.details-config.heading</p>
+
+<mat-vertical-stepper [linear]="false" #stepper (selectionChange)="previewSlots($event)">
+  <mat-step [stepControl]="nameFormGroup">
+    <ng-template matStepLabel>
+      <span translate>shop.details-config.start.heading</span>
+    </ng-template>
+    <form [formGroup]="nameFormGroup" *ngIf="nameFormGroup">
+      <mat-form-field>
+        <mat-label translate>shop.details-config.start.name</mat-label>
+        <input matInput placeholder="{{ 'shop.details-config.start.name.placeholder' | translate }}"
+               formControlName="nameCtrl"
+               required>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label translate>shop.details-config.start.shop.name</mat-label>
+        <input matInput placeholder="{{ 'shop.details-config.start.shop.name.placeholder' | translate }}"
+               formControlName="businessNameCtrl" required>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperNext>
+          <span translate>shop.details-config.proceed</span>
+        </button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="addressFormGroup">
+    <ng-template matStepLabel>
+      <span translate>shop.details-config.address.heading</span>
+    </ng-template>
+    <form [formGroup]="addressFormGroup" *ngIf="addressFormGroup">
+      <mat-form-field>
+        <mat-label translate>shop.details-config.address.street</mat-label>
+        <input matInput formControlName="streetCtrl"
+               placeholder="{{ 'shop.details-config.address.street.placeholder' | translate }}" required>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label translate>shop.details-config.address.zipcode</mat-label>
+        <input matInput formControlName="zipCtrl"
+               placeholder="{{ 'shop.details-config.address.zipcode.placeholder' | translate }}" type="text"
+               oninput="javascript: this.value=this.value.replace(new RegExp(/[^\d]/g), ''); if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+               maxlength="5" minlength="5"
+               required>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label translate>shop.details-config.address.city</mat-label>
+        <mat-select formControlName="cityCtrl" style="width: 100%" required>
+          <mat-option *ngFor="let city of citySuggestions" [value]="city.placeName">{{city.placeName}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label translate>shop.details-config.address.supplement</mat-label>
+        <input matInput formControlName="suffixCtrl"
+               placeholder="{{ 'shop.details-config.address.supplement.placeholder' | translate }}">
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperPrevious>
+          <span translate>shop.details-config.back</span>
+        </button>
+        <button mat-button matStepperNext>
+          <span translate>shop.details-config.proceed</span>
+        </button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="descriptionFormGroup">
+    <ng-template matStepLabel>
+      <span translate>shop.details-config.description.heading</span>
+    </ng-template>
+    <form [formGroup]="descriptionFormGroup" *ngIf="descriptionFormGroup">
+      <div style="width: 100%">
+        <p translate>shop.details-config.description.description</p>
+        <mat-form-field style="width: 100%">
+          <mat-label translate>shop.details-config.description.label</mat-label>
+          <textarea matInput formControlName="descriptionCtrl"
+                    placeholder="{{ 'shop.details-config.description.placeholder' | translate}}"
+                    required></textarea>
+        </mat-form-field>
+      </div>
+      <div>
+        <p translate>shop.details-config.details.heading</p>
+        <div class="social-links">
+          <img src="../assets/web.png" class="social-links-logo">
+          <mat-form-field>
+            <mat-label translate>shop.details-config.details.website</mat-label>
+            <input matInput formControlName="urlCtrl"
+                   placeholder="{{ 'shop.details-config.details.website.placeholder' | translate }}">
+          </mat-form-field>
+        </div>
+        <p translate>shop.details-config.details.social.description</p>
+        <div class="social-links">
+          <img src="../assets/facebook.png" class="social-links-logo">
+          <mat-form-field>
+            <mat-label translate>shop.details-config.details.social.facebook</mat-label>
+            <input matInput formControlName="facebookCtrl"
+                   placeholder="{{ 'shop.details-config.details.social.facebook.placeholder' | translate}}">
+          </mat-form-field>
+        </div>
+        <div class="social-links">
+          <img src="../assets/instagram.png" class="social-links-logo">
+          <mat-form-field>
+            <mat-label translate>shop.details-config.details.social.instagram</mat-label>
+            <input matInput formControlName="instagramCtrl"
+                   placeholder="{{ 'shop.details-config.details.social.instagram.placeholder' | translate }}">
+          </mat-form-field>
+        </div>
+        <div class="social-links">
+          <img src="../assets/twitter.png" class="social-links-logo">
+          <mat-form-field>
+            <mat-label translate>shop.details-config.details.social.twitter</mat-label>
+            <input matInput formControlName="twitterCtrl"
+                   placeholder="{{ 'shop.details-config.details.social.twitter.placeholder' | translate }}">
+          </mat-form-field>
+        </div>
+      </div>
+      <div>
+        <button mat-button matStepperPrevious>
+          <span translate>shop.details-config.back</span>
+        </button>
+        <button mat-button matStepperNext>
+          <span translate>shop.details-config.proceed</span>
+        </button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="contactFormGroup">
+    <ng-template matStepLabel>
+      <span translate>shop.details-config.contact.heading</span>
+    </ng-template>
+    <form [formGroup]="contactFormGroup" *ngIf="contactFormGroup">
+      <p translate>shop.details-config.contact.description</p>
+      <small *ngIf="contactFormGroup.hasError('atLeastOneRequired')"
+             style="color: red">{{contactFormGroup.getError('atLeastOneRequired').text}}
+      </small>
+      <div *ngFor="let contactType of contactTypes.availableContactTypes">
+        <p>
+          <mat-icon svgIcon="{{contactType}}"
+                    style="margin-right: 5px; vertical-align: bottom"></mat-icon>
+          {{contactTypes.getDisplayName(contactType)}}
+        </p>
+        <mat-form-field>
+          <mat-label translate>shop.details-config.contact.contact</mat-label>
+          <input matInput formControlName="{{contactType.toLowerCase()}}Ctrl"
+                 placeholder="{{ 'shop.details-config.contact.contact.placeholder' | translate }}">
+        </mat-form-field>
+      </div>
+      <div>
+        <button mat-button matStepperPrevious>
+          <span translate>shop.details-config.back</span>
+        </button>
+        <button mat-button matStepperNext>
+          <span translate>shop.details-config.proceed</span>
+        </button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="openingFormGroup">
+    <ng-template matStepLabel>
+      <span translate>shop.details-config.opening.heading</span>
+    </ng-template>
+    <form [formGroup]="openingFormGroup" *ngIf="openingFormGroup">
+      <div style="margin-top: 15px; margin-bottom: 30px; float:left;"
+           *ngFor="let day of days">
+        <button mat-mini-fab color="primary"
+                [ngClass]="{'disabled' : !this.businessHours.POSSIBLE_BUSINESS_HOURS.get(day).enabled}"
+                (click)="toggleAvailability(day)">{{day.substring(0, 2)}}
+        </button>
+      </div>
+      <div *ngFor="let day of days" style="clear: both;">
+        <h2 [ngClass]="{'disabled-font' : !this.businessHours.POSSIBLE_BUSINESS_HOURS.get(day).enabled}"
+            style="float:left; margin-right: 50px; vertical-align: bottom; width: 15%;">{{day}}</h2>
+        <mat-form-field>
+          <mat-label translate>shop.details-config.opening.from</mat-label>
+          <input formControlName="{{day}}FromCtrl" matInput type="time"
+                 value="{{this.businessHours.POSSIBLE_BUSINESS_HOURS.get(day).from}}">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label translate>shop.details-config.opening.to</mat-label>
+          <input formControlName="{{day}}ToCtrl" matInput type="time"
+                 value="{{this.businessHours.POSSIBLE_BUSINESS_HOURS.get(day).to}}">
+        </mat-form-field>
+      </div>
+      <div>
+        <span translate>shop.details-config.opening.duration</span>
+        <mat-form-field style="width: 30px; padding-left: 8px;">
+          <input formControlName="defaultCtrl" matInput type="number">
+        </mat-form-field>
+        <span translate>shop.details-config.opening.minutes</span>
+      </div>
+      <div>
+        <span translate>shop.details-config.opening.pause</span>
+        <mat-form-field style="width: 30px; padding-left: 8px;">
+          <input formControlName="pauseCtrl" matInput type="number">
+        </mat-form-field>
+        <span translate>shop.details-config.opening.minutes</span>
+      </div>
+      <div>
+        <span translate>shop.details-config.opening.delay</span>
+        <mat-form-field style="width: 30px; padding-left: 8px;">
+          <input formControlName="delayCtrl" matInput type="number">
+        </mat-form-field>
+        <span translate>shop.details-config.opening.minutes</span>
+      </div>
+      <div class="padding-vertical">
+        Bitte überprüfen Sie die Pausenzeiten, wenn Sie etwas an Ihren Öffnungszeiten ändern.
+      </div>
+      <div>
+        <button mat-button matStepperPrevious>
+          <span translate>shop.details-config.back</span>
+        </button>
+        <button mat-button matStepperNext>Weiter</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [optional]="true">
+    <ng-template matStepLabel>Sie können auch Pausenzeiten angeben.</ng-template>
+    <p>Wählen sie einfach die Slots aus, zu denen Sie keine Beratung anbieten.</p>
+    <slots
+      *ngIf="details.breaks"
+      [data]="slotsPreview"
+      (selectedSlot)="changeBreakSlot($event)"
+      [isSlotConfig]="true"
+    ></slots>
+    <div>
+      <button mat-button matStepperPrevious>Zurück</button>
+      <button mat-button matStepperNext>Weiter</button>
+    </div>
+  </mat-step>
+  <mat-step [optional]="true">
+    <ng-template matStepLabel>Sie haben ein Logo?</ng-template>
+    <form [formGroup]="logoFormGroup" *ngIf="logoFormGroup">
+      <p>Wählen Sie einfach eine JPEG oder PNG Bilddatei von Ihrem Rechner aus. Die Datei muss kleiner als 5 MB
+        sein.</p>
+      <p>Hier noch ein paar Tipps für ein gutes Logo:</p>
+      <ul>
+        <li>Wählen Sie ein Bild mit einem einheitlichen, einfarbigen Hintergrund, z.B. weiß oder transparent.</li>
+        <li>Vermeiden Sie Bilder mit viel Text. Das Logo wird verkleinert angezeigt und Text damit schwer lesbar.</li>
+        <li>Verwenden Sie keine Fotos. Diese sind verkleinert schwer erkennbar und wirken unruhig.</li>
+        <li>Verwenden Sie ein Bild mit einer Auflösung von mind. 300x300 Pixeln.</li>
+      </ul>
+      <div *ngIf="details.imageUrl || this.image" style="display: flex; flex-direction: column;">
+        <div>
+          <!-- Show current image unless user uploaded a new one.-->
+          <img *ngIf="details.imageUrl && !this.image" style="max-width: 150px; max-height: 150px"
+               src="{{details.imageUrl}}" alt="Shop logo">
+          <!-- If a user uploaded a new image, show this instead. -->
+          <img *ngIf="localImageUrl" src="{{this.localImageUrl}}" style="max-width: 150px; max-height: 150px">
+        </div>
+        <div *ngIf="this.image">
+          Ihre ausgewählte Datei: {{this.image?.name}}
+        </div>
+      </div>
+      <div style="display: flex; flex-direction: column;">
+        <div style="display: flex; flex-direction: row; max-width: 155px; padding-top: 5px">
+          <div *ngIf="details.imageUrl && !this.image" style="padding-right: 15px">
+            <!--  Disable delete button if user selected a new image to avoid confusion-->
+            <button mat-raised-button color="primary" (click)="onDeleteFile()">Datei löschen</button>
+          </div>
+          <div>
+            <input style="display: none" type="file" (change)="onFileChanged($event)" #fileInput>
+            <button mat-raised-button color="primary" (click)="fileInput.click()">Datei auswählen...</button>
+          </div>
+        </div>
+        <div style="padding-top: 10px;" *ngIf="details.imageUrl || this.image">
+          <p>Um das Logo auf der Seite Ihres Ladens schöner in Szene zu setzen, passen wir die Farbe rund um Ihr Logo
+            automatisch an. Das funktioniert in den allermeisten Fällen sehr gut. Falls Sie jedoch mit dem Ergebnis
+            unzufrieden sind, können Sie die Funktion auch später jederzeit deaktivieren.</p>
+          <mat-checkbox formControlName="autoColorCtrl">Automatische Farbe aktivieren (empfohlen)
+          </mat-checkbox>
+        </div>
+      </div>
+      <mat-error *ngIf="fileIsTooBig">Die Datei ist zu groß. Bitte wählen Sie eine Datei aus, die maximal 2 MB groß
+        ist.
+      </mat-error>
+      <mat-error *ngIf="wrongFileExtension">Bitte wählen Sie eine Datei mit der Endung '.png', '.jpeg' oder '.jpg'
+        aus.
+      </mat-error>
+    </form>
+  </mat-step>
+</mat-vertical-stepper>

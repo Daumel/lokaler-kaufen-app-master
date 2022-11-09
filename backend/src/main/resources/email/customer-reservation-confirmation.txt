@@ -1,0 +1,12 @@
+Hallo {{ customerName }},
+
+{{ shopName }} ruft Sie per {{ contactType }} am {{ date }} zwischen {{ start }} Uhr und {{ end }} Uhr unter {{ contact }} an.
+Bitte beachten Sie, dass es zu Stoßzeiten zu Verzögerungen kommen kann.
+
+Wenn Sie die Reservierung absagen möchten, klicken Sie bitte auf diesen Link:
+
+{{ cancelReservationLink }}
+
+Viele Grüße,
+
+Ihr lokaler.kaufen Team

@@ -1,0 +1,7 @@
+<div class="app-footer margin-vertical margin-horizontal" *ngIf="versionInfo">
+  <span class="version-info">
+    <p translate>app.footer.copyright</p>
+    <p>version: {{versionInfo.version}} | commit-hash: #{{versionInfo.commitHash.substr(0, 8)}}
+      | build-time: {{versionInfo.commitTime}}</p>
+  </span>
+</div>

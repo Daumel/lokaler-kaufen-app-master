@@ -1,0 +1,13 @@
+Hallo,
+
+klicken Sie auf diesen Link, um Ihr Passwort auf https://lokaler.kaufen neu zu vergeben:
+
+{{ link }}
+
+Falls Sie nicht veranlasst haben, Ihr Passwort neu zu setzen, können Sie diese E-Mail einfach ignorieren und löschen.
+
+Sollten Sie diese E-Mail öfters erhalten, wenden Sie sich bitte an den Support unter support@lokaler.kaufen.
+
+Viele Grüße,
+
+Ihr lokaler.kaufen Team

@@ -1,0 +1,26 @@
+spring.jpa.show-sql: true
+spring.datasource:
+  url: "jdbc:postgresql://localhost:5432/postgres"
+  username: "postgres"
+  password: "password"
+
+mercury:
+  frontend:
+    enable-caching: false
+  images:
+    devControllerEnabled: true
+    publicUrlTemplate: "http://localhost:8080/dev/image/{{ filename }}"
+    storageLocation: "/tmp/mercury-images"
+  cookies:
+    secure: false
+  email:
+    use-dummy: true # Set this to false to send real emails
+  features:
+    enableDebugDataCreation: true
+    approveShopsOnCreation: true
+  cleanup-job:
+    reservation:
+      cron: "0 * * * * *"
+
+variables:
+  domain: "http://localhost:4200"

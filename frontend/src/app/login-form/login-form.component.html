@@ -1,0 +1,34 @@
+<form [formGroup]="formController" (ngSubmit)="onSubmit()">
+  <mat-form-field class="form-item">
+    <mat-label translate>login.email</mat-label>
+    <input
+      type="email"
+      formControlName="email"
+      placeholder="{{ 'login.email' | translate }}"
+      required
+      matInput
+      autofocus
+    />
+  </mat-form-field>
+
+  <mat-form-field class="form-item">
+    <mat-label translate>login.password</mat-label>
+    <input
+      type="password"
+      formControlName="password"
+      placeholder="{{ 'login.password' | translate }}"
+      required
+      matInput
+    />
+  </mat-form-field>
+
+  <button mat-raised-button
+          [disabled]="!formController.valid"
+          type="submit"
+          class="form-item"
+          color="primary">
+    <span translate>login.submit</span>
+  </button>
+
+  <p class="error" *ngIf="isFailed()" translate>login.error</p>
+</form>

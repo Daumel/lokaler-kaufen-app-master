@@ -1,0 +1,81 @@
+<div class="landing-page">
+
+  <section class="form-section padding-big-vertical padding-horizontal"
+           [ngClass]="{'margin-horizontal': !isSmallScreen, 'margin-big-bottom': isSmallScreen}">
+    <header>
+      <h2 translate>landing.title</h2>
+      <h3 translate>landing.subtitle</h3>
+    </header>
+
+    <form [formGroup]="form">
+      <mat-form-field>
+        <mat-label translate>landing.zipcode</mat-label>
+        <input [matAutocomplete]="auto"
+               class="zip-code-input"
+               formControlName="zipCode"
+               type="text"
+               name="location"
+               placeholder="PLZ"
+               (keyup)="checkZipCodeInput($event)"
+               required
+               maxlength="5"
+               minlength="5"
+               matInput
+               autofocus
+        />
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="start()">
+          <mat-option *ngFor="let suggestion of suggestions" [value]="suggestion.zipCode">
+            {{suggestion.zipCode}} {{suggestion.placeName}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+
+      <button type="submit"
+              [disabled]="startDisabled"
+              (click)="start()"
+              mat-raised-button
+              color="primary">
+        <span translate>landing.submit</span>
+      </button>
+    </form>
+
+    <a mat-button routerLink="/login" class="margin-top">
+      <span translate>landing.shop.owner</span>
+    </a>
+  </section>
+
+  <section class="explanation-area padding-all">
+    <h2>So leicht geht's</h2>
+
+    <div class="explanation-card-container">
+      <div class="explanation-card padding-all">
+        <div>
+          <img src="assets/choose_shop_symbol_white.svg" width="60" height="60" alt="Laden aussuchen"/>
+        </div>
+        <div>
+          <h3>1. Laden aussuchen</h3>
+          <p>Durchstöbern Sie alle Läden in Ihrer Nähe und wählen Sie Ihren Wunschladen aus.</p>
+        </div>
+      </div>
+      <div class="explanation-card padding-all">
+        <div>
+          <img src="assets/calendar_symbol_white.svg" width="60" height="60" alt="Termin vereinbaren"/>
+        </div>
+        <div>
+          <h3>2. Termin vereinbaren</h3>
+          <p>Wählen Sie den nächsten passenden Termin für Ihren Video-Besuch aus.</p>
+        </div>
+      </div>
+      <div class="explanation-card padding-all">
+        <div>
+          <img src="assets/video_shop_symbol_white.svg" width="60" height="60" alt="Einkaufen wie vor Ort"/>
+        </div>
+        <div>
+          <h3>3. Einkaufen wie vor Ort</h3>
+          <p>Der Laden ruft Sie ganz bequem zurück - ohne Warteschleife und wann es Ihnen passt.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>

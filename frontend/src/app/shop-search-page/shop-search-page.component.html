@@ -1,0 +1,66 @@
+<div>
+  <div class="align-baseline">
+    <mat-form-field class="search-field">
+      <mat-label translate>shop.search.heading</mat-label>
+
+      <input
+        matInput
+        placeholder="{{ 'shop.search.placeholder' | translate }}"
+        [(ngModel)]="searchBusiness"
+        (keyup)="handleKeyEvent($event)"
+      />
+
+      <a (click)="performSearch()" matSuffix>
+        <mat-icon>search</mat-icon>
+      </a>
+    </mat-form-field>
+
+    <div class="zip-code-div">
+      <span translate>shop.search.nearby</span>
+      <mat-form-field class="zip-code-field">
+        <input type="text"
+               minlength="5"
+               maxlength="5"
+               matInput
+               (keyup)="checkZipCodeInput($event)"
+               [(ngModel)]="newLocation"
+               (click)="selectAll($event)"
+               (keyup)="handleKeyEvent($event)"
+        />
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="text-no-values padding-horizontal" *ngIf="isSearchEmpty">
+    {{ 'shop.search.empty' | translate: { lastSearchString: lastSearchString } }}
+  </div>
+
+  <div *ngIf="!isSearchEmpty">
+
+    <mat-card class="mat-elevation-z3 clickable highlightable margin-top"
+              *ngFor="let shop of shops" (click)="showDetailPage({id: shop.id})">
+      <mat-card-content>
+        <div class="shop">
+          <div class="meta" [class.margin-bottom]="isSmallScreen">
+            <div class="shop-logo-container" [class.padding-horizontal]="!isSmallScreen">
+              <shop-logo [imageUrl]="shop.imageUrl"></shop-logo>
+            </div>
+
+            <mat-divider [vertical]="true" class="divider" *ngIf="!isSmallScreen"></mat-divider>
+
+            <div class="shop-text" [class.padding-horizontal]="!isSmallScreen" [class.padding-left]="isSmallScreen">
+              <div class="mat-card-title shop-title">{{ shop.name }}</div>
+              <div class="mat-card-subtitle">{{ 'shop.search.distance' | translate: { distance: shop.distance.toFixed(0) } }}</div>
+            </div>
+          </div>
+
+          <div class="shop-contact-types" [class.margin-bottom]="isSmallScreen">
+            <contact-types [availableContactTypes]="shop.supportedContactTypes"></contact-types>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+  </div>
+  <page-footer></page-footer>
+</div>
