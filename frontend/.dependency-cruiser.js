@@ -1,9 +1,8 @@
 /** @type {import('dependency-cruiser').IConfiguration} */
 module.exports = {
     forbidden: [
-        /* rules from the 'recommended' preset: */
         {
-            name: 'ADP',
+            name: 'no-circular-dependency',
             severity: 'error',
             comment:
                 'This dependency is part of a circular relationship. You might want to revise ' +
@@ -13,26 +12,26 @@ module.exports = {
                 circular: true
             }
         },
-        // {
-        //     name: "SDP",
-        //     severity: 'error',
-        //     comment:
-        //         "This module violates the 'stable dependencies' principle; it depends " +
-        //         "on a module that is likely to be more prone to changes than it is " +
-        //         "itself. Consider refactoring.",
-        //     from: {},
-        //     to: {
-        //         moreUnstable: true,
-        //     },
-        // },
         {
-            name: 'not-to-api',
-            comment:
-                'This module uses Client (API-calling) code.',
+            name: 'not-to-spec',
             severity: 'error',
-            from: { "pathNot": "^src/app/api/([^/]+)/.+" },
+            comment:
+                'This module depends on a spec (test) file. The sole responsibility of a spec file is to test code. ' +
+                "If there's something in a spec that's of use to other modules, it doesn't have that single " +
+                'responsibility anymore. Factor it out into (e.g.) a separate utility/ helper or a mock.',
+            from: {},
             to: {
-                path: '"pathNot": "^src/app/api/([^/]+)/.+"'
+                path: '\\.(spec|test)\\.(js|mjs|cjs|ts|ls|coffee|litcoffee|coffee\\.md)$'
+            }
+        },
+        {
+            name: 'no-outward-model-dependency',
+            severity: 'error',
+            comment:
+                'Models are not allowed to import modules outside of the model folder.',
+            from: {"path": "model/.*\\.ts"},
+            to: {
+                pathNot: 'model/.*\\.ts'
             }
         },
         {
@@ -51,80 +50,31 @@ module.exports = {
                     '\\.d\\.ts$',                            // TypeScript declaration files
                     '(^|/)tsconfig\\.json$',                 // TypeScript config
                     '(^|/)(babel|webpack)\\.config\\.(js|cjs|mjs|ts|json)$', // other configs
-                    '^src/environments/environment.prod.ts$',
+                    'environment.prod.ts$',
                 ]
             },
             to: {},
         },
         {
-            "name": "not-to-ngx-logger",
-            "comment": "Don't use ngx logger - use the teambit logger instead",
-            "severity": "error",
-            "from": { "pathNot": "^node_modules" },
-            "to": { "path": "^ngx-logger" }
+            "name": "not-to-core-http",
+            "severity": "warn",
+            "comment": "Don't rely on node's http module because of internal guideline BOYLE-839 - use https instead",
+            "from": {"pathNot": "^node_modules"},
+            "to": {"path": "^http$"}
         },
-        /* rules you might want to tweak for your specific situation: */
+    ],
+    required: [
         {
-            name: 'not-to-spec',
-            comment:
-                'This module depends on a spec (test) file. The sole responsibility of a spec file is to test code. ' +
-                "If there's something in a spec that's of use to other modules, it doesn't have that single " +
-                'responsibility anymore. Factor it out into (e.g.) a separate utility/ helper or a mock.',
-            severity: 'error',
-            from: {},
-            to: {
-                path: '\\.(spec|test)\\.(js|mjs|cjs|ts|ls|coffee|litcoffee|coffee\\.md)$'
-            }
-        },
-        {
-            name: 'not-to-dev-dep',
-            severity: 'error',
-            comment:
-                "This module depends on an npm package from the 'devDependencies' section of your " +
-                'package.json. It looks like something that ships to production, though. To prevent problems ' +
-                "with npm packages that aren't there on production declare it (only!) in the 'dependencies'" +
-                'section of your package.json. If this module is development only - add it to the ' +
-                'from.pathNot re of the not-to-dev-dep rule in the dependency-cruiser configuration',
-            from: {
-                path: '^(src)',
-                pathNot: '\\.(spec|test)\\.(js|mjs|cjs|ts|ls|coffee|litcoffee|coffee\\.md)$'
+            name: "must-import-api-utilities",
+            severity: "error",
+            module: {
+                path: "api/([^/]+)/.+",
+                pathNot: "api/api-utilities.ts$",
             },
             to: {
-                dependencyTypes: [
-                    'npm-dev'
-                ]
-            }
+                path: "api/api-utilities.ts$",
+            },
         },
-        {
-            name: 'optional-deps-used',
-            severity: 'info',
-            comment:
-                "This module depends on an npm package that is declared as an optional dependency " +
-                "in your package.json. As this makes sense in limited situations only, it's flagged here. " +
-                "If you're using an optional dependency here by design - add an exception to your" +
-                "dependency-cruiser configuration.",
-            from: {},
-            to: {
-                dependencyTypes: [
-                    'npm-optional'
-                ]
-            }
-        },
-        {
-            name: 'peer-deps-used',
-            comment:
-                "This module depends on an npm package that is declared as a peer dependency " +
-                "in your package.json. This makes sense if your package is e.g. a plugin, but in " +
-                "other cases - maybe not so much. If the use of a peer dependency is intentional " +
-                "add an exception to your dependency-cruiser configuration.",
-            severity: 'warn',
-            from: {},
-            to: {
-                dependencyTypes: [
-                    'npm-peer'
-                ]
-            }
-        }
     ],
     options: {
 
@@ -171,7 +121,7 @@ module.exports = {
            true: also detect dependencies that only exist before typescript-to-javascript compilation
            "specify": for each dependency identify whether it only exists before compilation or also after
          */
-        // tsPreCompilationDeps: false,
+        tsPreCompilationDeps: true,
 
         /*
            list of extensions to scan that aren't javascript or compile-to-javascript.
@@ -375,4 +325,4 @@ module.exports = {
         }
     }
 };
-// generated: dependency-cruiser@11.18.0 on 2022-11-09T07:42:08.386Z
+// generated: dependency-cruiser@11.18.0 on 2022-11-09T12:41:01.060Z
