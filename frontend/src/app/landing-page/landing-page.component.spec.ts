@@ -13,9 +13,13 @@ import {TranslateModule} from '@ngx-translate/core';
 /**
  * Overriding the ZipCodeCacheService to prevent cross-test leaking through the browser's localStorage.
  */
-class MockZipCodeCacheService {
+export class MockZipCodeCacheService {
 
   private zipCode = '';
+
+  static returnTrue(): boolean {
+    return true;
+  }
 
   setZipCode(zipCode: string) {
     this.zipCode = zipCode;
@@ -24,7 +28,6 @@ class MockZipCodeCacheService {
   getZipCode(): string {
     return this.zipCode;
   }
-
 }
 
 describe('LandingPageComponent', () => {

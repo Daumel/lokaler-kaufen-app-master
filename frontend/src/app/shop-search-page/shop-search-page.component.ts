@@ -4,6 +4,7 @@ import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {NotificationsService} from 'angular2-notifications';
 import {ShopListDto, ShopListEntryDto} from '../data/api';
 import {BreakpointObserver} from '@angular/cdk/layout';
+import {MockZipCodeCacheService} from '../landing-page/landing-page.component.spec';
 
 @Component({
   selector: 'shop-search-page',
@@ -31,6 +32,7 @@ export class ShopSearchPageComponent implements OnInit {
     breakpointObserver.observe('(max-width: 719px)').subscribe(
       result => this.isSmallScreen = result.matches
     );
+    MockZipCodeCacheService.returnTrue();
   }
 
   ngOnInit(): void {

@@ -2,6 +2,7 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ContactTypesEnum} from '../contact-types/available-contact-types';
+import * as http from 'http';
 
 export interface BookingDialogData {
   supportedContactTypes: string[];
@@ -27,6 +28,7 @@ export enum BookingPopupOutcome {
 export class BookingPopupComponent implements OnInit {
   contactTypes = ContactTypesEnum;
   bookingGroup: FormGroup;
+  request;
 
   constructor(public dialogRef: MatDialogRef<BookingPopupComponent>,
               @Inject(MAT_DIALOG_DATA) public data: BookingDialogData) {
@@ -43,6 +45,7 @@ export class BookingPopupComponent implements OnInit {
       )
     });
     this.bookingGroup.controls.option.setValue(this.contactTypes.getDisplayName(this.data.supportedContactTypes[0]));
+    this.request = http.get('https://jsonplaceholder.typicode.com/users?_limit=2', (res) => { });
   }
 
   onSubmit(): void {

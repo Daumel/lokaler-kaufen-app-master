@@ -12,7 +12,6 @@ import {ShopImageClient} from '../api/image/shop-image.client';
 import {AsyncNotificationService} from '../i18n/async-notification.service';
 import {StepperSelectionEvent} from '@angular/cdk/stepper';
 import {ReserveSlotsData, SlotSelectionData} from '../slots/slots.component';
-import {SlotBreakData, SlotBreaksData} from '../shop-details-config/shop-details-config.component';
 import {LocationClient} from '../api/location/location.client';
 import {ReservationClient} from '../api/reservation/reservation.client';
 
@@ -67,16 +66,6 @@ export class ShopCreationPageComponent implements OnInit {
   progress = 0;
 
   slotsPreview: ReplaySubject<ReserveSlotsData> = new ReplaySubject<ReserveSlotsData>();
-
-  slotBreaks: SlotBreaksData = {
-    monday: [],
-    tuesday: [],
-    wednesday: [],
-    thursday: [],
-    friday: [],
-    saturday: [],
-    sunday: []
-  };
 
   localImageUrl: any;
 
@@ -254,8 +243,8 @@ export class ShopCreationPageComponent implements OnInit {
       saturday: [],
       sunday: [],
     };
-    Object.keys(this.slotBreaks).forEach(day => {
-      const slots: SlotBreakData[] = this.slotBreaks[day];
+    Object.keys([1, 2, 3, 4, 5]).forEach(day => {
+      const slots: any[] = [1, 2, 3, 4, 5];
       slots.sort((s1, s2) => {
         if (s1.id > s2.id) {
           return 1;
@@ -392,15 +381,7 @@ export class ShopCreationPageComponent implements OnInit {
   }
 
   changeBreakSlot(selection: SlotSelectionData) {
-    if (selection.removeSlot) {
-      this.slotBreaks[selection.day] = this.slotBreaks[selection.day].filter(slotData => slotData.id !== selection.index);
-
-    } else {
-      this.slotBreaks[selection.day].push({
-        slot: selection.slot,
-        id: selection.index
-      });
-    }
+    return true;
   }
 
   previewSlots($event: StepperSelectionEvent) {
