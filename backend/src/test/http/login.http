@@ -1,4 +1,4 @@
-## Login as admin
+## LoginDto as admin
 
 POST {{ host }}/api/admin/login
 Content-Type: application/json
@@ -21,7 +21,7 @@ GET {{ host }}/api/admin/login/token-info
 
 DELETE {{ host }}/api/admin/login
 
-### Login as shop
+### LoginDto as shop
 
 POST {{ host }}/api/shop/login
 Content-Type: application/json

@@ -8,19 +8,19 @@ public class LoginException extends BusinessException {
     }
 
     public static LoginException forAdminEmail(String email) {
-        return new LoginException(String.format("Login failed for admin '%s'", email));
+        return new LoginException(String.format("LoginDto failed for admin '%s'", email));
     }
 
     public static LoginException forShopLoginEmail(String email) {
-        return new LoginException(String.format("Login failed for shop '%s'", email));
+        return new LoginException(String.format("LoginDto failed for shop '%s'", email));
     }
 
     public static LoginException forAdminToken(AdminToken token) {
-        return new LoginException(String.format("Login failed for admin with token '%s'", token.getToken()));
+        return new LoginException(String.format("LoginDto failed for admin with token '%s'", token.getToken()));
     }
 
     public static LoginException forShopToken(ShopToken token) {
-        return new LoginException(String.format("Login failed for shop with token '%s'", token.getToken()));
+        return new LoginException(String.format("LoginDto failed for shop with token '%s'", token.getToken()));
     }
 
     public static LoginException forShopCreationToken(ShopCreationToken token) {

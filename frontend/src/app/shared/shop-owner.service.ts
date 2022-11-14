@@ -38,10 +38,10 @@ export class ShopOwnerService {
   login(credentials: LoginCredentials) {
     return this.http.post(API_SHOP_OWNER_LOGIN, credentials).toPromise()
 
-      .then(() => console.log('[ShopOwnerService] Login successful.'))
+      .then(() => console.log('[ShopOwnerService] LoginDto successful.'))
 
       .catch(error => {
-        console.error('[ShopOwnerService] Login failed.', error);
+        console.error('[ShopOwnerService] LoginDto failed.', error);
         this.loginStateService.logoutShopOwner();
         throw error;
       });

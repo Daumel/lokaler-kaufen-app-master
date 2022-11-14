@@ -48,7 +48,7 @@ export class LogoutInterceptor implements HttpInterceptor {
         // some "unauthorized" call, alright
         this.notificationsService.alert(
           'Ausgeloggt',
-          'Ihre Login-Session ist vermutlich abgelaufen. Bitte loggen Sie sich noch einmal ein.'
+          'Ihre LoginDto-Session ist vermutlich abgelaufen. Bitte loggen Sie sich noch einmal ein.'
         );
 
         if (LogoutInterceptor.wasAdminRequest(request.url)) {

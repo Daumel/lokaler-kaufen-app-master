@@ -54,7 +54,7 @@ export class LoginFormComponent {
           this.router.navigate([this.redirectPath]);
         },
         error => {
-          console.error('Login request failed.', error);
+          console.error('LoginDto request failed.', error);
           this.loginState = LoginState.FAILED;
         }
       );

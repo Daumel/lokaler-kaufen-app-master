@@ -11,7 +11,7 @@
  */
 import {BreaksDto} from './breaksDto';
 import {SlotConfigDto} from './slotConfigDto';
-import {SocialLinksDto} from './socialLinksDto';
+import {SocialLinks} from './socialLinks';
 
 export interface UpdateShopDto {
   addressSupplement?: string;
@@ -23,7 +23,7 @@ export interface UpdateShopDto {
   name?: string;
   ownerName?: string;
   slots?: SlotConfigDto;
-  socialLinks?: SocialLinksDto;
+  socialLinks?: SocialLinks;
   street?: string;
   website?: string;
   zipCode?: string;

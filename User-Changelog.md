@@ -29,7 +29,7 @@
 * Banner für Internet Explorer- und Edge-Benutzer hinzugefügt
 * Verbesserungen für mobile Geräte
 * Link zur Support-Seite in den unteren Bereich der Seite eingefügt
-* Bugfix: Der Login für Ladenbesitzer ignoriert nun Groß- und Kleinschreibung bei E-Mail-Adressen
+* Bugfix: Der LoginDto für Ladenbesitzer ignoriert nun Groß- und Kleinschreibung bei E-Mail-Adressen
 
 ## 31.03.2020 (1.0.1)
 

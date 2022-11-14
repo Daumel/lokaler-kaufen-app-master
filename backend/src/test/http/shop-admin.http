@@ -1,6 +1,6 @@
-# Before running requests, make sure to execute 'Login as admin' first. This will set the necessary cookies.
+# Before running requests, make sure to execute 'LoginDto as admin' first. This will set the necessary cookies.
 
-### Login as admin
+### LoginDto as admin
 POST {{ host }}/api/admin/login
 Content-Type: application/json
 

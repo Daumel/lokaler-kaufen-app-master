@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 import {SlotConfigDto} from './slotConfigDto';
-import {SocialLinksDto} from './socialLinksDto';
+import {SocialLinks} from './socialLinks';
 
 export interface ShopAdminDto {
   addressSupplement?: string;
@@ -27,7 +27,7 @@ export interface ShopAdminDto {
   ownerName?: string;
   shareLink?: string;
     slots?: SlotConfigDto;
-    socialLinks?: SocialLinksDto;
+    socialLinks?: SocialLinks;
     street?: string;
     website?: string;
     zipCode?: string;

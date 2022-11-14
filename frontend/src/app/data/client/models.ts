@@ -22,7 +22,7 @@ export * from './model/slotConfigDto';
 export * from './model/slotDayDto';
 export * from './model/slotDto';
 export * from './model/slotsDto';
-export * from './model/socialLinksDto';
+export * from './model/socialLinks';
 export * from './model/tokenInfoDto';
 export * from './model/updateShopDto';
 export * from './model/versionDto';

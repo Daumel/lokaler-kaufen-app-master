@@ -31,7 +31,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * 3. Use token from shop creation link to create shop
  * 4. Approve shop from admin
  * 5. Check if shop is in the list
- * 6. Login as shop
+ * 6. LoginDto as shop
  * 7. See shop details
  */
 class CreateShopIntegrationTest extends IntegrationTestSpecification {
