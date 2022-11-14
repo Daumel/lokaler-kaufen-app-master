@@ -55,7 +55,7 @@ describe('architecture test', () => {
     const rule = await filesOfProject()
       .inFolder('model')
       .should()
-      .matchPattern(".*Dto.ts")
+      .matchPattern('.*Dto.ts')
       .check();
 
     expect(rule).toEqual([]);
