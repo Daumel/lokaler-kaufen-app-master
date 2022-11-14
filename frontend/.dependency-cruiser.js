@@ -69,10 +69,10 @@ module.exports = {
             severity: "error",
             module: {
                 path: "api/([^/]+)/.+",
-                pathNot: "api/api-utilities.ts$",
+                pathNot: "api/api-utilities\\.ts$",
             },
             to: {
-                path: "api/api-utilities.ts$",
+                path: "api/api-utilities\\.ts$",
             },
         },
     ],
