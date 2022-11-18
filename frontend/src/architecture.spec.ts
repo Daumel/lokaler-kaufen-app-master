@@ -5,10 +5,10 @@ import 'tsarch/dist/jest';
 import {FileConditionBuilder, filesOfProject} from 'tsarch';
 
 describe('architecture test', () => {
-  let files: FileConditionBuilder
+  let files: FileConditionBuilder;
 
   beforeAll(() => {
-    files = filesOfProject("tsconfig.app.json")
+    files = filesOfProject("tsconfig.app.json");
   })
 
   // architecture tests can take a while to finish
@@ -46,11 +46,6 @@ describe('architecture test', () => {
     expect(violations).toEqual([]);
   });
 
-  // socialLinks.ts wird erkannt, aber loginDto.ts nicht.
-  // Wenn man einen Breakpoint bei files.js in der Zeile 230 setzt,
-  // dann sieht man, dass loginDto.ts gar nicht in der Liste "projectedNodes"
-  // bzw. auch nicht bei der Liste "graph" enthalten ist
-  // Nur wenn loginDto.ts ein Package importiert, taucht das bei "graph" und somit auch bei "projectedNodes" auf
   it('models must end with \'Dto\'', async () => {
     const rule = await filesOfProject()
       .inFolder('model')
@@ -61,6 +56,9 @@ describe('architecture test', () => {
     expect(rule).toEqual([]);
   });
 
+  // Wenn man einen Breakpoint bei files.js in der Zeile 187 setzt,
+  // dann sieht man, dass node/http nicht in der Liste "projectedNodes"
+  // bzw. auch nicht in der Liste "graph" enthalten ist
   // it('modules must not import the http module', async () => {
   //   const violations = await filesOfProject()
   //     .inFolder('app')
