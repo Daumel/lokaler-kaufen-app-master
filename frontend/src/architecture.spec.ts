@@ -24,12 +24,12 @@ describe('architecture test', () => {
     expect(violations).toEqual([]);
   });
 
-  it('modules must not depend on .spec files', async () => {
+  it('modules must not depend on test files', async () => {
     const violations = await filesOfProject()
       .inFolder('app')
       .shouldNot()
       .dependOnFiles()
-      .withName('.*\.spec')
+      .withName('.*\.(spec|test)')
       .check();
 
     expect(violations).toEqual([]);
