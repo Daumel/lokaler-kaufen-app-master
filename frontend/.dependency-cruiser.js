@@ -2,7 +2,7 @@
 module.exports = {
     forbidden: [
         {
-            name: 'no-circular-dependency',
+            name: 'no-circular-dependencies',
             severity: 'error',
             comment:
                 'This dependency is part of a circular relationship. You might want to revise ' +
@@ -13,10 +13,10 @@ module.exports = {
             }
         },
         {
-            name: 'not-to-spec',
+            name: 'not-to-test',
             severity: 'error',
             comment:
-                'This module depends on a spec (test) file. The sole responsibility of a spec file is to test code. ' +
+                'This module depends on a test file. The sole responsibility of a spec file is to test code. ' +
                 "If there's something in a spec that's of use to other modules, it doesn't have that single " +
                 'responsibility anymore. Factor it out into (e.g.) a separate utility/ helper or a mock.',
             from: {},
